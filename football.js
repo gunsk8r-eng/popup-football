@@ -1,0 +1,32 @@
+/* ===== FOOTBALL POPUP + LIVECHAT LOADER =====
+   ใช้แบบ: <script src="https://<ที่อยู่ไฟล์>/football.js?lc=<ชื่อไลฟ์แชท>" defer></script>
+   เช่น ?lc=osiris168-com จะโหลด https://osiris168-com.livechat.cv/widget.js?version=v2 ให้ด้วย */
+(function(){var s=document.currentScript,m=s&&/[?&]lc=([\w-]+)/.exec(s.src);if(m){var c=document.createElement("script");c.src="https://"+m[1]+".livechat.cv/widget.js?version=v2";c.defer=true;document.head.appendChild(c)}})();
+(()=>{
+const A="https://site.api.espn.com/apis/",D="sports/soccer/",K=[["ทุกลีก"],["พรีเมียร์ลีก","eng.1"],["ลาลีกา","esp.1"],["เซเรียอา","ita.1"],["บุนเดสลีกา","ger.1"],["ลีกเอิง","fra.1"],["UCL","uefa.champions"],["ยูโรปา","uefa.europa"]],
+go=()=>{
+const d=document,w=d.createElement("div");var st=d.createElement("style");st.textContent="#pfB{position:fixed;left:0;top:50%;z-index:99998;transform:translateY(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px 8px;border:0;border-right:3px solid #00ff85;border-radius:0 14px 14px 0;background:#37003c;color:#fff;font:inherit;cursor:pointer}#pfB i{font-style:normal;font-size:22px}#pfB span{writing-mode:vertical-rl;transform:rotate(180deg)}#pfO{position:fixed;inset:0;z-index:99999;background:#0009;opacity:0;visibility:hidden;transition:.35s}#pfO.on{opacity:1;visibility:visible}#pfP{position:absolute;left:12px;top:50%;width:min(400px,calc(100% - 24px));max-height:88vh;display:flex;flex-direction:column;border-radius:20px;overflow:hidden;background:#fff;box-shadow:0 20px 50px #0006;transform:translate(-115%,-50%);transition:transform .5s}#pfO.on #pfP{transform:translate(0,-50%)}#pfH{position:relative;padding:16px 16px 0;background:linear-gradient(135deg,#37003c,#963cff)}#pfH b{display:block;font-size:20px;color:#fff!important}#pfH small{font-size:12px;color:#00ff85!important}#pfX{position:absolute;top:12px;right:12px;width:32px;height:32px;border:0;border-radius:50%;background:#fff3;color:#fff}#pfK{display:flex;gap:6px;overflow-x:auto;margin-top:10px;scrollbar-width:none}#pfK button{flex:none;padding:4px 10px;border:1px solid #fff6;border-radius:99px;background:none;color:#fff!important;font:inherit;font-size:13px}#pfK .on{background:#00ff85;color:#37003c!important}#pfH nav{display:flex;gap:4px;margin-top:8px}#pfH nav button{flex:1;padding:9px;border:0;border-radius:12px 12px 0 0;background:#fff2;color:#fff!important;font:inherit;cursor:pointer}#pfH nav .on{background:#fff;color:#37003c!important}#pfC{overflow:auto;padding:10px 12px 14px}#pfC :is(table,tr,td,th,span){color:#222!important;background:none!important}.pfE{padding:30px 0;text-align:center}.pfD{margin:6px 2px;font-size:13px}.pfG{margin:12px 2px 6px;font-weight:600}.pfM{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:6px;margin-bottom:6px;padding:10px 8px;border-radius:9px;background:#f6f1f8}.pfM.live{background:#eafff4;box-shadow:inset 3px 0 #ff2d55}.pfT{display:flex;align-items:center;gap:6px;min-width:0;font-size:14px}.pfT.h{flex-direction:row-reverse}.pfT img{width:24px;height:24px}.pfM em{min-width:62px;text-align:center;font-style:normal;font-size:17px;font-weight:600}.pfM em small{display:block;font-size:11px}.pfE,.pfM em small{color:#888!important}.pfD,#pfC th{color:#7a5a85!important}.pfG,.pfM em,#pfC td:last-child{color:#37003c!important}.pfM.live em small{color:#ff2d55!important}#pfC table{width:100%;border-collapse:collapse;font-size:13px}#pfC th{padding:6px 3px}#pfC td{padding:6px 3px;border-top:1px solid #eee;text-align:center}#pfC td:last-child{font-weight:600}#pfC td:nth-child(2){text-align:left}";d.head.appendChild(st);
+w.innerHTML='<button id="pfB"><i>⚽</i><span>ตารางบอล</span></button><div id="pfO"><div id="pfP"><div id="pfH"><b>ผลบอลสด</b><small id="pfU"></small><button id="pfX">✕</button><div id="pfK">'+K.map((k,i)=>`<button data-l="${i}">${k[0]}</button>`).join("")+'</div><nav><button data-t="m">แข่งวันนี้</button><button data-t="s">ตารางคะแนน</button></nav></div><div id="pfC"></div></div></div>';
+d.body.append(w);
+let g=i=>d.getElementById(i),O=g("pfO"),C=g("pfC"),t="m",l=0,k,
+J=u=>fetch(A+u).then(r=>r.json()),
+f=(x,o)=>new Date(x).toLocaleString("th-TH",{timeZone:"Asia/Bangkok",...o}),
+hm=x=>f(x,{hour:"2-digit",minute:"2-digit"}),
+U=x=>new Date(x).toISOString().slice(0,10).replace(/-/g,""),
+T=(c,h)=>`<span class="pfT${h?" h":""}"><img src="${c.logo||c.logos?.[0]?.href}">${c.shortDisplayName}</span>`,
+M=e=>{let[c,z]=e.competitions[0].competitors,h=c.homeAway=="home"?c:z,a=h==c?z:c,s=e.status.type.state;
+return`<div class="pfM${s=="in"?" live":""}">${T(h.team,1)}<em>${s=="pre"?hm(e.date):h.score+" - "+a.score+`<small>${s=="in"?"● LIVE "+e.status.displayClock:"จบ"}</small>`}</em>${T(a.team)}</div>`},
+m=async()=>{let b=Math.floor((Date.now()+36e5)/864e5)*864e5-36e5,e=b+864e5,S=c=>"site/v2/"+D+c+"/scoreboard",
+o=(await Promise.all((l?[K[l]]:K.slice(1)).map(async([n,c])=>{let q={},v=[];
+for(let j of await Promise.all([J(S(c)+"?dates="+U(b)),J(S(c)+"?dates="+U(e-1))]))for(let x of j.events||[]){let y=Date.parse(x.date);if(y>=b&&y<e&&!q[x.id])q[x.id]=v.push(x)}
+return v.length?`<p class="pfG">${n}</p>`+v.sort((x,y)=>x.date<y.date?-1:1).map(x=>M(x)).join(""):""}))).join("");
+return`<p class="pfD">${f(b+36e5,{weekday:"long",day:"numeric",month:"long"})}</p>`+(o||'<p class="pfE">วันนี้ไม่มีแข่ง</p>')},
+s=async()=>{let r=(await J("v2/"+D+K[l][1]+"/standings")).children[0].standings.entries.map(e=>{let o={t:e.team};e.stats.forEach(z=>o[z.name]=z.displayValue);return o}).sort((a,b)=>a.rank-b.rank);
+return'<table><tr><th>#<th>ทีม<th>นัด<th>ชนะ<th>เสมอ<th>แพ้<th>+/-<th>แต้ม'+r.map(o=>`<tr><td>${o.rank}<td>${T(o.t)}<td>${o.gamesPlayed}<td>${o.wins}<td>${o.ties}<td>${o.losses}<td>${o.pointDifferential}<td>${o.points}`).join("")+"</table>"},
+B=d.querySelectorAll("#pfH [data-l],#pfH [data-t]"),P=()=>B.forEach(b=>b.className=b.dataset.l==l||b.dataset.t==t?"on":""),
+L=z=>{if(t=="s"&&!l)l=1;P();z||(C.innerHTML='<p class="pfE">กำลังโหลด</p>');let n=t+l;(t=="m"?m():s()).then(h=>{if(n==t+l){C.innerHTML=h;g("pfU").textContent="อัปเดต "+hm(new Date)}},()=>z||(C.innerHTML='<p class="pfE">โหลดไม่ได้ ลองใหม่</p>'))},
+cl=()=>{O.className="";clearInterval(k)};
+g("pfB").onclick=()=>{O.className="on";L();k=setInterval(L,6e4,1)};
+g("pfX").onclick=cl;O.onclick=e=>e.target==O&&cl();
+B.forEach(b=>b.onclick=()=>{b.dataset.t?t=b.dataset.t:l=+b.dataset.l;L()})};
+document.body?go():addEventListener("DOMContentLoaded",go)})();
